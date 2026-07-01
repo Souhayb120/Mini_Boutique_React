@@ -1,11 +1,13 @@
 import { useState } from "react";
-
+import s from "../assets/c.png"
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <nav className="navbar">
-      <h1>Enaa'<span style={{ color: "#9CC943" }}>s</span> Store</h1>
+
+    <img height={70} width={220} src={s} alt="" />
+
 
       <button
         className="nav-toggle"

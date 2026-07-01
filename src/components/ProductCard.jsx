@@ -1,9 +1,16 @@
-
-const ProductCard = ({ product, onAddToCart }) => {
+const ProductCard = ({ product, onAddToCart, onDelete }) => {
   return (
     <div className="product-card">
       <div className="product-card__img">
         <span className="product-card__badge">Nouveau</span>
+        <button
+          className="product-card__delete"
+          onClick={() => onDelete(product)}
+          aria-label="Supprimer le produit"
+          title="Supprimer"
+        >
+          ✕
+        </button>
         <img src={product.image} alt={product.name} />
       </div>
 
@@ -32,12 +39,20 @@ const ProductCard = ({ product, onAddToCart }) => {
               <span className="product-card__old-price">{product.oldPrice} MAD</span>
             )}
           </div>
-          <button
-            className="product-card__btn"
-            onClick={() => onAddToCart(product)}
-          >
-            🛒 Ajouter
-          </button>
+          <div className="product-card__actions">
+            <button
+              className="product-card__btn"
+              onClick={() => onAddToCart(product)}
+            >
+              🛒 Ajouter
+            </button>
+            <button
+              className="product-card__btn product-card__btn--delete"
+              onClick={() => onDelete(product)}
+            >
+              🗑️ Supprimer
+            </button>
+          </div>
         </div>
       </div>
     </div>

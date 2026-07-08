@@ -8,10 +8,12 @@ import "./index.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
+  const [productToDelete, setProductToDelete] = useState(null);
   const [products, setProducts] = useState(productsData);
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-
+  const [selectedCategory, setSelectedCategory] = useState("all");
+const cartItems = cart.length;
   const handleAddToCart = (product) => {
     setCart((prevCart) => {
       const existing = prevCart.find((item) => item.id === product.id);
@@ -19,6 +21,7 @@ function App() {
         return prevCart.map((item) =>
           item.id === product.id ? { ...item, qty: item.qty + 1 } : item
         );
+
       }
       return [...prevCart, { ...product, qty: 1 }];
     });
@@ -26,9 +29,7 @@ function App() {
   };
 
   const handleDelete = (product) => {
-    if (window.confirm(`Supprimer "${product.name}" ?`)) {
-      setProducts((prev) => prev.filter((p) => p.id !== product.id));
-    }
+  setProductToDelete(product);
   };
 
   const handleIncrease = (product) => {
@@ -53,38 +54,59 @@ function App() {
     setCart((prev) => prev.filter((item) => item.id !== product.id));
   };
 
-  const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+  
+
+  const categories = ["all", ...new Set(products.map((p) => p.category))];
+  const filteredProducts =
+    selectedCategory === "all"
+      ? products
+      : products.filter((p) => p.category === selectedCategory);
 
   return (
     <div>
-      <Header cartCount={cartCount} />
+      <Header cartItems={cartItems}/>
 
       <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-        <div
-          style={{
-            padding: "2rem",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr",
-            gap: "1rem",
-            flexWrap: "wrap",
-          }}
-        >
-          {products.map((p) => (
-            <ProductCard
-              key={p.id}
-              product={p}
-              onAddToCart={handleAddToCart}
-              onDelete={handleDelete}
-            />
-          ))}
+        <div style={{ width: "100%", maxWidth: "1200px", padding: "2rem" }}>
+          <div className="category-buttons">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                className={`filter-btn ${
+                  selectedCategory === cat ? "active" : ""
+                }`}
+                onClick={() => setSelectedCategory(cat)}
+              >
+                {cat === "all" ? "Toutes" : cat}
+              </button>
+            ))}
+          </div>
+
+          {filteredProducts.length > 0 ? (
+            <div className="product-grid">
+              {filteredProducts.map((p) => (
+                <ProductCard
+                  key={p.id}
+                  product={p}
+                  onAddToCart={handleAddToCart}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="notFound">
+              <h3>Aucun produit trouvé</h3>
+            </div>
+          )}
         </div>
+        
       </div>
 
       <Footer />
 
       <button className="cart-fab" onClick={() => setIsCartOpen(true)}>
         🛒
-        {cartCount > 0 && <span className="cart-fab__badge">{cartCount}</span>}
+       <p>{cartItems}</p>
       </button>
 
       <Cart
@@ -94,6 +116,7 @@ function App() {
         onRemove={handleRemoveFromCart}
         onIncrease={handleIncrease}
         onDecrease={handleDecrease}
+        
       />
     </div>
   );

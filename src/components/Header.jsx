@@ -4,7 +4,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" >
 
     <img height={70} width={220} src={s} alt="" />
 
@@ -25,7 +25,7 @@ const Header = () => {
           <button onClick={() => setMenuOpen(false)}>Get Started</button>
         </li>
       </ul>
-      <button className="nav-cta-desktop">Pannier</button>
+      <button className="nav-cta-desktop">Pannier </button>
     </nav>
   );
 };

@@ -1,6 +1,9 @@
+
+
 const ProductCard = ({ product, onAddToCart, onDelete }) => {
+ 
   return (
-    <div className="product-card">
+    <div className="product-card" >
       <div className="product-card__img">
         <span className="product-card__badge">Nouveau</span>
         <button
@@ -44,7 +47,8 @@ const ProductCard = ({ product, onAddToCart, onDelete }) => {
               className="product-card__btn"
               onClick={() => onAddToCart(product)}
             >
-              🛒 Ajouter
+              🛒 Ajouter 
+            
             </button>
             <button
               className="product-card__btn product-card__btn--delete"

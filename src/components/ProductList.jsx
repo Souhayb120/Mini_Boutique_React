@@ -5,6 +5,7 @@ import "../index.css";
 const ProductList = ({ initialProducts }) => {
   const [products, setProducts] = useState(initialProducts);
   const [cart, setCart] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   const handleAddToCart = (product) => {
     setCart((prevCart) => {
@@ -26,16 +27,47 @@ const ProductList = ({ initialProducts }) => {
     );
   };
 
+  const handleFilterClick = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const categories = ["all", ...new Set(products.map((p) => p.category))];
+
+  const filteredProducts =
+    selectedCategory === "all"
+      ? products
+      : products.filter((p) => p.category === selectedCategory);
+
   return (
-    <div className="product-grid">
-      {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          product={product}
-          onAddToCart={handleAddToCart}
-          onDelete={handleDelete}
-        />
-      ))}
+    <div className="filter-container">
+      <div className="category-buttons">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            className={`filter-btn ${selectedCategory === cat ? "active" : ""}`}
+            onClick={() => handleFilterClick(cat)}
+          >
+            {cat === "all" ? "Toutes" : cat}
+          </button>
+        ))}
+      </div>
+
+      <div className="product-grid">
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onAddToCart={handleAddToCart}
+              onDelete={handleDelete}
+            />
+          ))
+        ) : (
+          <div className="notFound">
+            <h3>Aucun produit trouvé</h3>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

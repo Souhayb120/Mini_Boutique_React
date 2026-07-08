@@ -5,7 +5,6 @@ const Cart = ({ cart, isOpen, onClose, onRemove, onIncrease, onDecrease }) => {
   return (
     <>
       {isOpen && <div className="cart-overlay" onClick={onClose} />}
-
       <div className={`cart-drawer ${isOpen ? "cart-drawer--open" : ""}`}>
         <div className="cart-drawer__header">
           <h3>Mon Panier</h3>
@@ -13,7 +12,6 @@ const Cart = ({ cart, isOpen, onClose, onRemove, onIncrease, onDecrease }) => {
             ✕
           </button>
         </div>
-
         {cart.length === 0 ? (
           <p className="cart-drawer__empty">Votre panier est vide.</p>
         ) : (

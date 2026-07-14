@@ -1,75 +1,73 @@
 import { useState } from "react";
-import ProductCard from "./ProductCard";
-import "../index.css";
+import CardItem from "./CardItem";
+const ProductList = ({ onAddToCart, productsList}) => {
+  const [category, setCategory] = useState("ALL");
 
-const ProductList = ({ initialProducts }) => {
-  const [products, setProducts] = useState(initialProducts);
-  const [cart, setCart] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const filterByCategory = () => {
+    const filterC = category === "ALL";
+    if (!filterC) {
+      return productsList.filter((i) => i.category === category);
+    }
 
-  const handleAddToCart = (product) => {
-    setCart((prevCart) => {
-      const existing = prevCart.find((item) => item.id === product.id);
-      if (existing) {
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, qty: item.qty + 1 }
-            : item
-        );
-      }
-      return [...prevCart, { ...product, qty: 1 }];
-    });
+    return productsList;
   };
 
-  const handleDelete = (product) => {
-    setProducts((prevProducts) =>
-      prevProducts.filter((p) => p.id !== product.id)
-    );
-  };
-
-  const handleFilterClick = (category) => {
-    setSelectedCategory(category);
-  };
-
-  const categories = ["all", ...new Set(products.map((p) => p.category))];
-
-  const filteredProducts =
-    selectedCategory === "all"
-      ? products
-      : products.filter((p) => p.category === selectedCategory);
+  console.log(filterByCategory);
 
   return (
-    <div className="filter-container">
-      <div className="category-buttons">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            className={`filter-btn ${selectedCategory === cat ? "active" : ""}`}
-            onClick={() => handleFilterClick(cat)}
+    <>
+      <div className="container">
+        <div className="category">
+             <button
+            onClick={() => {
+              setCategory("ALL");
+            }}
           >
-            {cat === "all" ? "Toutes" : cat}
+            ALL
           </button>
-        ))}
+          <button
+            onClick={() => {
+              setCategory("Smartphones");
+            }}
+          >
+            Smartphones
+          </button>
+          <button
+            onClick={() => {
+              setCategory("Audio");
+            }}
+          >
+            Audio
+          </button>
+          <button
+            onClick={() => {
+              setCategory("Accessoires");
+            }}
+          >
+            Accessoires
+          </button>
+          <button
+            onClick={() => {
+              setCategory("Moniteurs");
+            }}
+          >
+            Moniteurs
+          </button>
+          <button
+            onClick={() => {
+              setCategory("Ordinateurs");
+            }}
+          >
+            Ordinateurs
+          </button>
+        </div>
+        <div className="product_container">
+          {filterByCategory().map((p) => (
+            <CardItem key={p.id} product={p} onAddToCart={onAddToCart} />
+          ))}
+        </div>
       </div>
-
-      <div className="product-grid">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onAddToCart={handleAddToCart}
-              onDelete={handleDelete}
-            />
-          ))
-        ) : (
-          <div className="notFound">
-            <h3>Aucun produit trouvé</h3>
-          </div>
-        )}
-      </div>
-    </div>
+    </>
   );
 };
-
 export default ProductList;

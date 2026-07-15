@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 export default function PageNotFound() {
   return (
     <div className="page_not_found">
-      <Header />
+     
       <h1>seem you are lost</h1>
       <h1>404</h1>
       <Link to='/'>Home</Link>

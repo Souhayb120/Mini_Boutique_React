@@ -8,8 +8,10 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.3.0",
+    "link": "^2.1.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.81.0",
     "react-router-dom": "^7.18.1",
     "yup": "^1.7.1"
   },

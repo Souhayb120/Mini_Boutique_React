@@ -8,10 +8,13 @@ import products from "../components/Products.json"
 import { Link , NavLink } from "react-router-dom";
 export default function PageNotFound() {
   return (
+    <>
+   
+    <Header/>
     <div className="page_not_found">
-     
-      <h1>seem you are lost</h1>
-      <h1>404</h1>
+     <img style={{borderRadius : '20'}} src="https://app.enaa.ma/storage/media/user_profile_photo/thumbnails/thumb_69eb4471a73b0.png" alt="" srcset="" />
+      <h1>Souhayb Hadi</h1>
+      <h3>souhaybhadi06@gmail.com</h3>
       <NavLink to='/'   style={({ isActive }) => ({
                     color: isActive ? "yellow" : "white",
                     fontWeight: isActive ? "bold" : "normal",
@@ -19,5 +22,7 @@ export default function PageNotFound() {
                     marginRight: "15px",
                 })}>Home</NavLink>
     </div>
+     </>
   )
+  
 }

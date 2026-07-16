@@ -8,7 +8,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import AddProduct from "./pages/AddProduct";
 import PageNotFound from "./pages/PageNotFound";
+import AboutUs from "./pages/AboutUs";
 import products from "./components/Products.json";
+import ProductDetails from "./pages/ProductDetails";
 
 
 function App() {
@@ -46,6 +48,8 @@ function App() {
       <Routes>
       <Route path="/" element={<Home onAddToCart={onAddToCart} onRemoveFromCart={onRemoveFromCart} cart={cart} productsList={productsList} />} />
       <Route path="/AddProduct" element={<AddProduct onAddToProducts={onAddToProducts}/>} />
+      <Route path="/Products/:id" element={<ProductDetails/>} />
+       <Route path="/AboutUs" element={<AboutUs />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
      

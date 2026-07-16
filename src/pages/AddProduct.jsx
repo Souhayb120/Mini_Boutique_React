@@ -8,8 +8,10 @@ import products from "../components/Products.json";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { useForm } from "react-hook-form";
 
 export default function AddProduct({ onAddToProducts }) {
+  
   const schema = yup.object({
     name: yup.string().required("Name is required"),
 

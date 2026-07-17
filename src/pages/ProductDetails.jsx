@@ -3,13 +3,14 @@ import { useParams } from "react-router-dom";
 import products from "../components/Products.json";
 import Header from "../components/Header";
 
-const ProductDetails = () => {
-    
+const ProductDetails = ({productsList}) => {
+
   const { id } = useParams();
-const product = products.find(
+const product = productsList.find(
     p => p.id === Number(id)
 );
- console.log(product);
+ console.log(productsList);
+  console.log(id);
   return (
     <>
     <Header/>

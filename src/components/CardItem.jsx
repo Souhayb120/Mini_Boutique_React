@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 const CardItem = ({ product, onAddToCart }) => {
+    console.log(product);
   return (
     <div className="card">
       <img src={product.image} />

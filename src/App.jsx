@@ -37,7 +37,6 @@ function App() {
   };
 
     const onAddToProducts = (product) => {
-      console.log(product)
     setProductsList((prevCart) => {
       return ([...prevCart, product ]);
     });
@@ -47,8 +46,8 @@ function App() {
   return (
       <Routes>
       <Route path="/" element={<Home onAddToCart={onAddToCart} onRemoveFromCart={onRemoveFromCart} cart={cart} productsList={productsList} />} />
-      <Route path="/AddProduct" element={<AddProduct onAddToProducts={onAddToProducts}/>} />
-      <Route path="/Products/:id" element={<ProductDetails/>} />
+      <Route path="/AddProduct" element={<AddProduct length={productsList.length} onAddToProducts={onAddToProducts}/>} />
+      <Route path="/Products/:id" element={<ProductDetails  productsList={productsList}/>} />
        <Route path="/AboutUs" element={<AboutUs />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>

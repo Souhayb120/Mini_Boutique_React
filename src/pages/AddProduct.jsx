@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import "../App.css";
 import ProductList from "../components/ProductList";
 import Cart from "../components/Cart";
 import Header from "../components/Header";
@@ -9,9 +8,9 @@ import "../App.css";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-export default function AddProduct({ onAddToProducts }) {
-  
+export default function AddProduct({ onAddToProducts , length }) {
   const schema = yup.object({
     name: yup.string().required("Name is required"),
 
@@ -23,61 +22,40 @@ export default function AddProduct({ onAddToProducts }) {
 
     price: yup.number().min(1),
   });
-  const navigate = useNavigate();
-  const [form, setForm] = useState({
-    name: "",
-    category: "",
-    quantite: "",
-    image: "",
-    price: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
   });
+
+  const navigate = useNavigate();
+  const onSubmit = (data) => {
+    onAddToProducts({...data , id : length + 1});
+    navigate("/");
+  };
 
   return (
     <div>
       <Header />
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          await schema.validate(form);
-          onAddToProducts(form);
-          navigate("/");
-        }}
-        className="addform"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="addform">
         <label>Name</label>
-        <input
-          type="text"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-        />
+        <input type="text" {...register("name")} />
+        <p>{errors.name?.message}</p>
 
         <label>Category</label>
-        <input
-          type="text"
-          value={form.category}
-          onChange={(e) => setForm({ ...form, category: e.target.value })}
-        />
+        <input type="text" {...register("category")} />
+        <p>{errors.category?.message}</p>
 
         <label>Quantity</label>
-        <input
-          type="number"
-          value={form.quantite}
-          onChange={(e) => setForm({ ...form, quantite: e.target.value })}
-        />
-
+        <input type="number" {...register("quantite")} />
+        <p>{errors.quantite?.message}</p>
         <label>Price</label>
-        <input
-          type="number"
-          value={form.price}
-          onChange={(e) => setForm({ ...form, price: e.target.value })}
-        />
-
+        <input type="number" {...register("price")} />
+        <p>{errors.price?.message}</p>
         <label>Image URL</label>
-        <input
-          type="text"
-          value={form.image}
-          onChange={(e) => setForm({ ...form, image: e.target.value })}
-        />
+        <input type="text" {...register("image")} />
 
         <button type="submit">Add to Products</button>
       </form>

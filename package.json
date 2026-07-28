@@ -1,7 +1,12 @@
 {
   "name": "react-essentials-start",
   "version": "0.0.0",
+  "homepage": "https://souhayb120.github.io/Mini_Boutique_React",
   "scripts": {
+    "predeploy": "npm run build",
+     "deploy": "gh-pages -d build",
+     "start": "react-scripts start",
+    "build": "react-scripts build",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -18,6 +23,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",
+    "gh-pages": "^6.3.0",
     "vite": "^4.3.9"
   },
   "keywords": [],

@@ -117,7 +117,8 @@ Page d'accueil
 ### Image
 
 ```md
-![Page d'accueil](screenshots/home.png)
+![home](src\assets\home.png)
+![addProuct](src\assets\add.png)
 ```
 
 ### Explication

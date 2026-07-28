@@ -117,7 +117,7 @@ Page d'accueil
 ### Image
 
 
-![home](src\assets\home.png)
+![home](src/assets/home.png)
 
 
 ### Explication
@@ -137,7 +137,7 @@ Add Produit
 ### Image
 
 
-![addProuct](src\assets\add.png)
+![addProuct](src/assets/add.png)
 
 
 ### Explication

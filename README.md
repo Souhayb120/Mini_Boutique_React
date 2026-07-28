@@ -116,10 +116,9 @@ Page d'accueil
 
 ### Image
 
-```md
+
 ![home](src\assets\home.png)
-![addProuct](src\assets\add.png)
-```
+
 
 ### Explication
 
@@ -132,14 +131,14 @@ Cette capture montre la liste des produits disponibles dans la boutique.
 ### Titre
 
 ```
-Panier d'achat
+Add Produit
 ```
 
 ### Image
 
-```md
-![Panier](screenshots/cart.png)
-```
+
+![addProuct](src\assets\add.png)
+
 
 ### Explication
 
